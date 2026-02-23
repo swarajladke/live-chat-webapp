@@ -1,36 +1,62 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Live Chat App
 
-## Getting Started
+A production-ready real-time 1:1 chat web application built with a modern tech stack.
 
-First, run the development server:
+## Tech Stack
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript (Strict Mode)
+- **Backend & Real-time**: Convex
+- **Authentication**: Clerk
+- **Styling**: Tailwind CSS, shadcn/ui
 
+## Features Configured
+1. **Authentication**: Handled via Clerk. Users data syncs with Convex on login.
+2. **User List & Search**: Live search through registered users to start conversations.
+3. **1-on-1 Direct Messaging**: Real-time DB sync using Convex.
+4. **Message Timestamps**: Custom utility formatting. 
+5. **Empty States**: Well-designed placeholders.
+6. **Responsive Layout**: Desktop sidebar, mobile full-screen toggling.
+7. **Online/Offline Status**: Tracked and displayed across users. 
+8. **Typing Indicators**: Auto-clearing typing bubbles.
+9. **Unread Badge**: Smart unread tracking.
+10. **Smart Auto-Scroll**: Messages slide to view but pause if reading history.
+
+## Setup Instructions
+
+### 1. Install Dependencies
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Configure Environment Variables
+Copy `.env.local.example` to `.env.local` and add your Clerk API keys, and set up your Convex project:
+```env
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+CLERK_SECRET_KEY=sk_test_...
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Initialize Convex
+Run the following command to log in to Convex, initialize a project, and start the development server. This will generate the necessary types (`convex/_generated`) from the schema:
+```bash
+npx convex dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Start the Application
+In a separate terminal, run:
+```bash
+npm run dev
+```
 
-## Learn More
+Your app will be available at [http://localhost:3000](http://localhost:3000).
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Folder Structure Highlights
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `app/page.tsx`: Main Chat Application layout with Auth boundaries.
+- `components/ChatApp.tsx`: Manages conversation selection and user syncing logic.
+- `components/chat/ChatArea.tsx`: Live chat feed, typing indicators, auto-scroll.
+- `components/sidebar/Sidebar.tsx`: Handles conversations lists, user searching, and unread counts.
+- `convex/schema.ts`: Scalable Database Schema optimized with indexes.
+- `convex/` functions: Extensibile backend functions `users.ts`, `messages.ts`, `conversations.ts`.
+- `lib/utils.ts`: Utility format functions.
