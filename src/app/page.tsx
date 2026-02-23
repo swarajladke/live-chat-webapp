@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useAuth } from "@clerk/nextjs";
 import ChatApp from "@/components/ChatApp";
 
@@ -48,12 +49,12 @@ export default function Home() {
             </div>
 
             <div className="space-y-4 pt-4">
-              <button
-                onClick={() => window.location.href = '/sign-in'}
-                className="w-full py-4 px-6 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-bold transition-all shadow-lg shadow-indigo-500/30 active:scale-95 uppercase tracking-widest text-xs"
+              <Link
+                href="/sign-in"
+                className="w-full py-4 px-6 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-bold transition-all shadow-lg shadow-indigo-500/30 active:scale-95 uppercase tracking-widest text-xs inline-block"
               >
                 Get Started
-              </button>
+              </Link>
               <p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">
                 Secure • Encrypted • Instant
               </p>
